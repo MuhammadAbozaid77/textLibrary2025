@@ -1,57 +1,47 @@
+import { useEffect, useRef, useState } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
-import { useEffect, useState } from "react";
-import useHandelRealAttendance from "./useHandelRealAttendance";
 
-export default function StudentQrCodeScanner() {
-  const [scanResult, setScanResult] = useState("");
-  const { attendanceStatus } = useHandelRealAttendance(scanResult);
+export default function QrCodeScanner() {
+  const [scanResult, setScanResult] = useState(null);
+  const scannerRef = useRef();
 
   useEffect(() => {
-    if (scanResult) return; // Stop re-initializing if scan is already done
+    const scanner = new Html5QrcodeScanner(
+      "qr-reader",
+      {
+        fps: 10,
+        qrbox: { width: 250, height: 250 },
+      },
+      false
+    );
 
-    const readerElement = document.getElementById("reader");
-    if (!readerElement) return;
-
-    const scanner = new Html5QrcodeScanner("reader", {
-      qrbox: { width: 250, height: 250 },
-      fps: 5,
-    });
-
-    const success = (result) => {
-      setScanResult(result);
-      scanner.clear();
-      scanner.stop();
-    };
-
-    scanner.render(success, (err) => console.warn(err));
+    scanner.render(
+      (decodedText) => {
+        setScanResult(decodedText);
+        scanner.clear();
+      },
+      (errorMessage) => {
+        console.warn(errorMessage);
+      }
+    );
 
     return () => {
       scanner.clear();
-      scanner.stop();
     };
-  }, [scanResult]);
+  }, []);
 
   return (
-    <div>
-      <div className="mt-[50px] flex min-h-[500px] items-center justify-center border">
-        <div className="w-[500px]">
-          {scanResult ? (
-            <div>
-              <p className="text-green-600 font-bold">Success: {scanResult}</p>
-              <button
-                className="mt-4 p-2 bg-blue-500 text-white rounded"
-                onClick={() => setScanResult("")}
-              >
-                Scan Again
-              </button>
-            </div>
-          ) : (
-            <div id="reader"></div>
-          )}
-          <div className="mt-[50px] font-bold">
-            Data: Attendance Status - {attendanceStatus}
+    <div className="flex justify-center items-center h-[60vh]">
+      <div className="p-4 w-[500px]">
+        <h2 className="text-xl font-bold mb-2">QR Code Scanner</h2>
+        {scanResult ? (
+          <div className="bg-green-100 p-2 rounded">
+            <p>Scanned Result:</p>
+            <p className="font-bold">{scanResult}</p>
           </div>
-        </div>
+        ) : (
+          <div id="qr-reader" ref={scannerRef} className="w-full"></div>
+        )}
       </div>
     </div>
   );
