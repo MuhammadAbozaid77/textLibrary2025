@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useGetLocation from "./useGetLocation";
-import { addStudentToLecture } from "../data/api";
+// import { addStudentToLecture } from "../data/api";
 import { isWithin50Meters } from "../data/checkMeters";
 
 export default function useHandelRealAttendance(scanResult) {
@@ -9,44 +9,53 @@ export default function useHandelRealAttendance(scanResult) {
 
   useEffect(() => {
     getLocation();
-  }, [getLocation]); // Ensure location updates when needed
+  }, []); // Only call getLocation once
 
   useEffect(() => {
     const markAttendance = async () => {
+      if (!scanResult) return;
+
+      const parsedData = JSON.parse(scanResult); // Ensure scanResult is parsed
+      const {
+        Latitude,
+        Longitude,
+        AcademicNumber,
+        SectionId,
+        EmployeeId,
+        LectureId,
+        CourseNumber,
+      } = parsedData;
+
       if (
-        scanResult?.Latitude &&
-        scanResult?.Longitude &&
+        Latitude &&
+        Longitude &&
         location?.lat &&
         location?.lon &&
-        scanResult?.AcademicNumber &&
-        scanResult?.SectionId &&
-        scanResult?.EmployeeId &&
-        scanResult?.LectureId &&
-        scanResult?.CourseNumber
+        AcademicNumber &&
+        SectionId &&
+        EmployeeId &&
+        LectureId &&
+        CourseNumber
       ) {
-        // Check if student is within 50 meters of lecture location
         const isNearby = isWithin50Meters(
-          scanResult.Latitude,
-          scanResult.Longitude,
+          Latitude,
+          Longitude,
           location.lat,
           location.lon
         );
 
         if (isNearby) {
           try {
-            const response = await addStudentToLecture({
-              EmployeeId: scanResult?.EmployeeId,
-              LectureId: scanResult?.LectureSessionId,
-              CourseNumber: scanResult?.CourseNumber,
-              AcademicNumber: 23006100862,
-              SectionId: 40,
-            });
-            setAttendanceStatus(response);
+            // const response = await addStudentToLecture({
+            //   EmployeeId,
+            //   LectureId,
+            //   CourseNumber,
+            //   AcademicNumber,
+            //   SectionId,
+            // });
+            setAttendanceStatus("Goooogggggggggggggggg", isNearby);
           } catch (error) {
-            console.error(
-              "Error marking attendance: Cant Fetching Data",
-              error
-            );
+            console.error("Error marking attendance:", error);
             setAttendanceStatus(null);
           }
         } else {
@@ -62,5 +71,5 @@ export default function useHandelRealAttendance(scanResult) {
     }
   }, [location, scanResult]);
 
-  return attendanceStatus;
+  return { attendanceStatus };
 }
