@@ -1,4 +1,4 @@
-import QrCodeScanner from "./pages/QrCodeScanner";
+import QrCodeScanner from "./pages/qrCode/QrCodeScanner";
 
 export default function App() {
   return (

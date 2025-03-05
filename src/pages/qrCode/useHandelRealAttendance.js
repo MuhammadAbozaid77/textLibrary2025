@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useGetLocation from "./useGetLocation";
 // import { addStudentToLecture } from "../data/api";
-import { isWithin50Meters } from "../data/checkMeters";
+import { isWithin50Meters } from "../../data/checkMeters";
 
 export default function useHandelRealAttendance(scanResult) {
   const { getLocation, location } = useGetLocation();
