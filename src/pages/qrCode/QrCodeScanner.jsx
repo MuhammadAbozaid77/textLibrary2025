@@ -118,7 +118,7 @@ export default function QrCodeScanner() {
             Result : {distanceData?.result}{" "}
           </span>
           <span className="text-red-500 font-semibold text-[20px]">
-            Result : {distanceData?.distance}{" "}
+          distance : {distanceData?.distance}{" "}
           </span>
         </div>
       </div>

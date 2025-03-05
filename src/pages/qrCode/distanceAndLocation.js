@@ -28,12 +28,12 @@ export function checkStudentLocation(
   if (distance > 50) {
     return {
       result: "Student NOT in location.",
-      distance: distance.toFixed(2),
+      distance: distance,
     };
   } else {
     return {
       result: "Student IN location. Distance:",
-      distance: distance.toFixed(2),
+      distance: distance,
     };
   }
 }
