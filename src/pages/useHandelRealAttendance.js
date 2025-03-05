@@ -53,10 +53,10 @@ export default function useHandelRealAttendance(scanResult) {
             //   AcademicNumber,
             //   SectionId,
             // });
-            setAttendanceStatus("Goooogggggggggggggggg");
+            setAttendanceStatus(isNearby);
           } catch (error) {
             console.error("Error marking attendance:", error);
-            setAttendanceStatus(null);
+            setAttendanceStatus("Error marking attendance:");
           }
         } else {
           setAttendanceStatus(
