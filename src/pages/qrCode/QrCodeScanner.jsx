@@ -53,13 +53,18 @@ export default function QrCodeScanner() {
     };
   }, []);
 
+  //----------------handelLocation-----------------------
+  function handelLocation() {
+    getLocation();
+  }
+
   //----------------handelDistance-----------------------
   function handelDistance() {
     // console.log(checkStudentLocation(studentLat, studentLon, schoolLat, schoolLon));
-    const studentLat = location.lat; // Example student's latitude
-    const studentLon = location.lon; // Example student's longitude
-    const schoolLat = scanResult?.[0].Longitude; // Example student's longitude
-    const schoolLon = scanResult?.[0].Latitude; // Example student's longitude
+    const studentLat = location?.lat; // Example student's latitude
+    const studentLon = location?.lon; // Example student's longitude
+    const schoolLat = scanResult?.[0]?.Latitude; // Example student's longitude
+    const schoolLon = scanResult?.[0]?.Longitude; // Example student's longitude
 
     const data = checkStudentLocation(
       studentLat,
@@ -69,17 +74,14 @@ export default function QrCodeScanner() {
     );
     setDistanceData(data);
   }
-  //----------------handelLocation-----------------------
-  function handelLocation() {
-    getLocation();
-  }
   return (
     <div className="flex justify-center items-center h-[60vh] flex-col">
       <div className="p-4 w-[500px]">
         <h2 className="text-xl font-bold mb-2">QR Code Scanner</h2>
         {scanResult ? (
-          <div className="bg-green-100 p-2 rounded">
+          <div className="bg-green-200 p-2 rounded">
             <p>Scanned Result:</p>
+            <p className="font-bold">{scanResult}</p>
             <p className="font-bold">{scanResult?.[0]}</p>
           </div>
         ) : (
