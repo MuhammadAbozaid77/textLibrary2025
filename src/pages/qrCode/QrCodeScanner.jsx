@@ -85,8 +85,8 @@ export default function QrCodeScanner() {
             <p className="font-bold">
               {"scanResult?.[0]"} : {scanResult}
             </p>
-            <p>Scanned LongTitude : {scanResult?.Longitude}</p>
-            <p>Scanned Latitude : {scanResult?.Latitude}</p>
+            {/* <p>Scanned LongTitude : {scanResult?.Longitude}</p>
+            <p>Scanned Latitude : {scanResult?.Latitude}</p> */}
           </div>
         ) : (
           <div id="qr-reader" ref={scannerRef} className="w-full"></div>
