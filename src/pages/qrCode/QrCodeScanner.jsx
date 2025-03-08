@@ -63,8 +63,8 @@ export default function QrCodeScanner() {
     // console.log(checkStudentLocation(studentLat, studentLon, schoolLat, schoolLon));
     const studentLat = location?.lat; // Example student's latitude
     const studentLon = location?.lon; // Example student's longitude
-    const schoolLat = scanResult?.[0]?.Latitude; // Example student's longitude
-    const schoolLon = scanResult?.[0]?.Longitude; // Example student's longitude
+    const schoolLat = Number(scanResult?.[0]?.Latitude); // Example student's longitude
+    const schoolLon = Number(scanResult?.[0]?.Longitude); // Example student's longitude
 
     const data = checkStudentLocation(
       studentLat,
@@ -118,7 +118,7 @@ export default function QrCodeScanner() {
             Result : {distanceData?.result}{" "}
           </span>
           <span className="text-red-500 font-semibold text-[20px]">
-          distance : {distanceData?.distance}{" "}
+            distance : {distanceData?.distance}{" "}
           </span>
         </div>
       </div>
