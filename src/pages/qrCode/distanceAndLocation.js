@@ -30,9 +30,14 @@ export function checkStudentLocation(
       result: "Student NOT in location.",
       distance: distance,
     };
+  } else if (distance < 50) {
+    return {
+      result: "Student in location.",
+      distance: distance,
+    };
   } else {
     return {
-      result: "Student IN location. Distance:",
+      result: "SomeThing Went Error",
       distance: distance,
     };
   }

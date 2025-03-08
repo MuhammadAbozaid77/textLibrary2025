@@ -115,10 +115,10 @@ export default function QrCodeScanner() {
         </h1>
         <div className="flex justify-start  flex-col">
           <span className="text-red-500 font-semibold text-[20px]">
-            Result : {distanceData?.result}{" "}
+            Result : {distanceData?.result}
           </span>
           <span className="text-red-500 font-semibold text-[20px]">
-            distance : {distanceData?.distance}{" "}
+            distance : {distanceData?.distance}
           </span>
         </div>
       </div>
