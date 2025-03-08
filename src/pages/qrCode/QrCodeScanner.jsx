@@ -82,11 +82,10 @@ export default function QrCodeScanner() {
           <div className="bg-green-200 p-2 rounded">
             <p>Scanned Result:</p>
             <p className="font-bold">
-              {"scanResult?.[0]"} : {scanResult?.[0]}
+              {"scanResult?.[0]"} : {scanResult}
             </p>
-            <p>Scanned LongTitude : {scanResult?.[0].Longitude}</p>
-            <p>Scanned Latitude : {scanResult?.[0].Latitude}</p>
-            <p className="font-bold">{scanResult?.[0]}</p>
+            <p>Scanned LongTitude : {scanResult?.Longitude}</p>
+            <p>Scanned Latitude : {scanResult?.Latitude}</p>
           </div>
         ) : (
           <div id="qr-reader" ref={scannerRef} className="w-full"></div>
