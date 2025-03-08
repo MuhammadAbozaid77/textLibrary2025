@@ -28,25 +28,16 @@ export function checkStudentLocation(
   if (distance > 50) {
     return {
       result: "Student NOT in location.",
-      distance: distance,
+      distance: distance.toFixed(2) + " meters",
     };
   } else if (distance < 50) {
     return {
       result: "Student in location.",
-      distance: distance,
+      distance: distance.toFixed(2) + " meters",
     };
   } else {
     return {
       result: "SomeThing Went Error",
-      distance: distance,
     };
   }
 }
-
-// // Example usage:
-// const studentLat = 30.0444; // Example student's latitude
-// const studentLon = 31.2357; // Example student's longitude
-// const schoolLat = 30.044; // Example school's latitude
-// const schoolLon = 31.236; // Example school's longitude
-
-// console.log(checkStudentLocation(studentLat, studentLon, schoolLat, schoolLon));
