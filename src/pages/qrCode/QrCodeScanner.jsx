@@ -40,7 +40,8 @@ export default function QrCodeScanner() {
 
     scanner.render(
       (decodedText) => {
-        setScanResult(decodedText);
+        const codde = JSON.parse(decodedText);
+        setScanResult(codde);
         scanner.clear();
       },
       (errorMessage) => {
